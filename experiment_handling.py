@@ -2,7 +2,7 @@ import multiprocessing
 
 from neuron import h
 
-from model_selector import verbose
+from file_handling import verbose
 
 h.load_file("stdrun.hoc")
 h.load_file("nrngui.hoc")
@@ -84,7 +84,7 @@ def get_traces(traces):
     return t, out_traces
 
 
-def current_clamp(Iinj, dur, delay, v_init, oC, loc, traces, verbose_level = 0):
+def current_clamp(Iinj, dur, delay, loc, traces, verbose_level = 0):
     """
     Inserts a current clamp point process into a NEURON model.
 
@@ -96,10 +96,6 @@ def current_clamp(Iinj, dur, delay, v_init, oC, loc, traces, verbose_level = 0):
         Simulation duration (ms).
     delay : float
         Current clamp delay time before current injection (ms).
-    v_init : float
-        NEURON simulation initial membrane potential (mV).
-    oC : float
-        NEURON simulation temperature (oC).
     loc : neuron.h.Section
         Section reference to insert current clamp instance.
     traces : list
