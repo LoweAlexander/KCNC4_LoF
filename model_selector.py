@@ -8,7 +8,7 @@ def del_secs(verbose_level = 0):
     """Deletes all currently defined sections within NEURON's namespace."""
     for sec in h.allsec():
         h.delete_section(sec=sec)
-    verbose('All neuron sections deleted', verbose_level)
+    verbose('All neuron sections deleted', verbose_level = verbose_level)
 
 def change_channels(target, new, verbose_level = 0):
     """
@@ -73,23 +73,23 @@ def variant_selector(model, modelArgs, variant = 'WT', verbose_level = 0):
 
     """
     
-    del_secs(verbose)
+    del_secs(verbose_level = verbose_level)
     m = model(*modelArgs)
-    verbose('Created WT model', 20, verbose_level)
+    verbose('Created WT model', 20, verbose_level = verbose_level)
     
     if variant == '50GBAR':
         change_channels('Kv3_4', 
                     [['Kv3_4', {'gkbar':0.5}]
                      ],
                     verbose)
-        verbose('Changed model to variant: 50GBAR.', 20, verbose_level)
+        verbose('Changed model to variant: 50GBAR.', 20, verbose_level = verbose_level)
         
     if variant == '0GBAR':
         change_channels('Kv3_4', 
                     [['Kv3_4', {'gkbar':0}]
                      ],
                     verbose)
-        verbose('Changed model to variant: 0GBAR.', 20, verbose_level)
+        verbose('Changed model to variant: 0GBAR.', 20, verbose_level = verbose_level)
     
     return m
 
