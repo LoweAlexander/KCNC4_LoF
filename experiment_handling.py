@@ -13,13 +13,21 @@ p = h.ParallelComputeTool()
 p.change_nthread(cores, 1)
 
 
-def initialise():
-    """Begin NEURON simulation with multiprocessing."""
+def initialise(fixed_step = True):
+    """
+    Begin NEURON simulation with multiprocessing.
+
+    Parameters
+    ----------
+    fixed_step : bool
+        Determine whether NEURON uses a fixed or variable timestep.
+    """
     
     p.multisplit(1)
-    
-    Fixed_step = h.CVode()
-    Fixed_step.active(0)
+
+    if fixed_step:
+        Fixed_step = h.CVode()
+        Fixed_step.active(0)
     
     h.finitialize(h.v_init)
     h.run()
