@@ -62,7 +62,7 @@ def set_conditions(dur, v_init, oC, dt = 0.025, verbose_level = 0):
     
     verbose(f'Running simulation for : {dur} with initial conditions v_init: {v_init}mV temperature: {oC}oC with fixed timestep: {dt}ms',
             20,
-            verbose_level)
+            verbose_level = verbose_level)
     initialise()
     
 
@@ -92,7 +92,7 @@ def get_traces(traces):
     return t, out_traces
 
 
-def current_clamp(Iinj, dur, delay, loc, traces, verbose_level = 0):
+def current_clamp(Iinj, dur, delay, loc, verbose_level = 0):
     """
     Inserts a current clamp point process into a NEURON model.
 
@@ -106,8 +106,6 @@ def current_clamp(Iinj, dur, delay, loc, traces, verbose_level = 0):
         Current clamp delay time before current injection (ms).
     loc : neuron.h.Section
         Section reference to insert current clamp instance.
-    traces : list
-        NEURON variable references to be recorded in the simulation.
     verbose_level : int, optional
         Output mode:
         0 = No output, 1 = print only, 2 = log only, 3 = print and log.
@@ -126,6 +124,6 @@ def current_clamp(Iinj, dur, delay, loc, traces, verbose_level = 0):
     
     verbose(f'Adding current clamp to section: {loc} with duration: {dur}ms and amplitude: {Iinj}nA after delay: {delay}ms',
             20,
-            verbose_level)
+            verbose_level = verbose_level)
     
     return ic
